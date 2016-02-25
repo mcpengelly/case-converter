@@ -6,10 +6,11 @@ function toSnakeCase (field) {
   return field.replace(/\s+/g, '_').toLowerCase();
 }
 
-// todo turn each letter after a space to capital
+// todo turn each letter after a space to capital, using groups?
 function toCamelCase (field) {
-  var temp = field.replace(/s?([a-z])/, '$1').toUpperCase();
-  return temp;
+  return field.replace(/(?:^\w|[A-Z]|\b\w)/g, function (letter, index) {
+    return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
+  }).replace(/\s+/g, '');
 }
 
 function buildObject (str) {
@@ -22,8 +23,9 @@ function buildObject (str) {
 }
 
 function readArguments () {
-  var fieldList = [];
   if (!process.argv) throw Error('input argument is undefined');
+
+  var fieldList = [];
   _.forEach(process.argv, function (argument) {
     fieldList.push(buildObject(argument));
   });
@@ -32,3 +34,4 @@ function readArguments () {
 
 var output = readArguments();
 console.log(output.slice(index_offset)); // cut out the additional node arguments from the list
+
