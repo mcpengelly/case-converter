@@ -11,11 +11,7 @@ function readCharacters (word) {
   // cache length
   var wordLength = word.length - 1;
   while (charIndex <= wordLength) {
-    if (charIndex === 0 && argIndex !== index_offset) {
-      result += word[charIndex].toUpperCase();
-    } else {
-      result += word[charIndex];
-    }
+    result += word[charIndex];
     charIndex += 1;
   }
   return result;
@@ -32,12 +28,21 @@ function nextArgument (callback) {
   while (argIndex <= argsLength) {
     word = process.argv[argIndex];
     field += readCharacters(word);
+    if (argIndex < argsLength) {
+      field += ' ';
+    }
     argIndex += 1;
   }
-  callback(field);
+  callback(field, console.log);
 }
 
-nextArgument(console.log);
+function toSnakeCase (field, callback) {
+  var lowercase = field.toLowerCase();
+  var snakeCaseField = lowercase.replace('/s/', '_');
+  callback(snakeCaseField);
+}
+
+nextArgument(toSnakeCase);
 
 // build js object:
 // unmodified
