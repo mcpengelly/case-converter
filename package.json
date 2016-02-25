@@ -1,0 +1,26 @@
+{
+  "name": "case-converter",
+  "version": "1.0.0",
+  "description": "turn a string into js objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcpengelly/case-converter.git"
+  },
+  "keywords": [
+    "case",
+    "convert"
+  ],
+  "author": "matt pengelly",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcpengelly/case-converter/issues"
+  },
+  "homepage": "https://github.com/mcpengelly/case-converter#readme",
+  "dependencies": {
+    "lodash": "^4.5.1"
+  }
+}
