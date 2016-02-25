@@ -17,7 +17,7 @@ function readCharacters (word) {
   return result;
 }
 
-function nextArgument (callback) {
+function readArguments (callback) {
   if (!process.argv) throw Error('input argument is undefined');
 
   var word = '';
@@ -33,16 +33,30 @@ function nextArgument (callback) {
     }
     argIndex += 1;
   }
-  callback(field, console.log);
+
+  return callback(field);
 }
 
-function toSnakeCase (field, callback) {
-  var lowercase = field.toLowerCase();
-  var snakeCaseField = lowercase.replace('/s/', '_');
-  callback(snakeCaseField);
+function toSnakeCase (field) {
+  return field.replace(/\s+/g, '_').toLowerCase();
 }
 
-nextArgument(toSnakeCase);
+function toCamelCase (field) {
+  return field.replace(/\s+/g, '+').toUpperCase();
+}
+
+function buildObject (str) {
+  var obj = {
+    comment: str,
+    field: toCamelCase(str),
+    caption: toSnakeCase(str),
+    type: ''
+  };
+  return obj;
+}
+
+var output = readArguments(buildObject);
+console.log(output);
 
 // build js object:
 // unmodified
