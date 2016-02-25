@@ -8,7 +8,7 @@ function toSnakeCase (field) {
 
 // todo turn each letter after a space to capital
 function toCamelCase (field) {
-  var temp = field.replace(/s?([a-z])/, '').toUpperCase();
+  var temp = field.replace(/s?([a-z])/, '$1').toUpperCase();
   return temp;
 }
 
